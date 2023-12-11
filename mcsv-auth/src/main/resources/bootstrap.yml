@@ -1,0 +1,16 @@
+spring:
+ datasource:
+  url: jdbc:postgresql://127.0.0.1:5432/mcsv-auth
+  username: postgres
+  password: Mestelan2610
+ jpa:
+  hibernate:
+   ddl-auto: update
+ application:
+  name: mcsv-auth
+ cloud:
+  config:
+   enabled: true
+   uri: http://localhost:8081
+jwt:
+ secret: s3cr3t_k3yw0rd.
