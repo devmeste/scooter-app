@@ -18,12 +18,12 @@ import com.arqui.integrador.mcsvadministrator.service.IAdministratorService;
 import jakarta.validation.Valid;
 
 @RestController
-public class AdministratorController implements IAdministratorController {
+public class AdminController implements IAdminController {
 
     IAdministratorService administratorService;
-    private static final Logger LOG = LoggerFactory.getLogger(AdministratorController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AdminController.class);
 
-    public AdministratorController(IAdministratorService administratorService) {
+    public AdminController(IAdministratorService administratorService) {
         this.administratorService = administratorService;
     }
 
@@ -106,8 +106,5 @@ public class AdministratorController implements IAdministratorController {
     public void setNewFare( FareDTO f) {
         this.administratorService.setNewFare(f);
     }
-
-    
-
 
 }

@@ -50,7 +50,7 @@ public class AuthService implements UserDetailsService{
 		saveUser(user, findRole(user.getRole()));
 	}
 	
-	public void register(CommonUserCreateDto user) {
+	public void register(CommonUserCreateDto user, String token) {
 		saveUser(user, findRole("user"));
 		this.userFeignClient.create(
 				UserDto.builder()
@@ -59,7 +59,7 @@ public class AuthService implements UserDetailsService{
 						.email(user.getEmail())
 						.firstname(user.getFirstname())
 						.surname(user.getSurname())
-						.build());
+						.build(), token);
 	}
 	
 	private void saveUser(UserCreateDto user, Role role) {

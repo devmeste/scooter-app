@@ -18,13 +18,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "administrator")
+@Table(name = "app_admin")
 public class Administrator implements Serializable {
    
 	private static final long serialVersionUID = 3253615484910702243L;
 
 	@Id
-    @Column(name = "administrator_id")
+    @Column(name = "admin_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

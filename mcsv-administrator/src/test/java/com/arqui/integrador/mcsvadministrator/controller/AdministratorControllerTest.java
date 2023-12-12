@@ -27,7 +27,7 @@ import com.arqui.integrador.mcsvadministrator.exception.ItemNotFoundException;
 import com.arqui.integrador.mcsvadministrator.service.IAdministratorService;
 
 @WebMvcTest(excludeAutoConfiguration = { SecurityAutoConfiguration.class })
-@ContextConfiguration(classes = { AdministratorController.class, CustomExceptionHandler.class })
+@ContextConfiguration(classes = { AdminController.class, CustomExceptionHandler.class })
 public class AdministratorControllerTest {
 	
 	@Autowired

@@ -25,8 +25,9 @@ import com.arqui.integrador.mcsvadministrator.dto.TravelsByYearsDTO;
 
 import jakarta.validation.Valid;
 
-@RequestMapping("/administrator")
-public interface IAdministratorController {
+@RequestMapping("/admin")
+public interface IAdminController {
+	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)

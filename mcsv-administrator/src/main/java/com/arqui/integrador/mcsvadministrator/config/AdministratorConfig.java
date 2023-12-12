@@ -12,5 +12,5 @@ public class AdministratorConfig {
     @LoadBalanced
 	public RestTemplate restTemplateAdministrator() { 
         return new RestTemplate();
-}
+    }
 }

@@ -11,5 +11,4 @@ public class McsvAdministratorApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(McsvAdministratorApplication.class, args);
 	}
-
 }

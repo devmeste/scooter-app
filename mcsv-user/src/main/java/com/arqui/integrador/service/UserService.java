@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import com.arqui.integrador.dto.AccountDto;
 import com.arqui.integrador.dto.ScooterDto;
 import com.arqui.integrador.dto.UserDto;
+import com.arqui.integrador.exception.InvalidUsernameException;
 import com.arqui.integrador.exception.ItemNotFoundException;
 import com.arqui.integrador.exception.UserHasAccountException;
 import com.arqui.integrador.model.Account;
@@ -92,11 +93,17 @@ public class UserService implements IUserService{
 		
 		userDto.setId(user.getId());
 		
-		this.userRepository.save(UserMapper.dtoToEntity(userDto));
-		
-		LOG.info("User edited: {}", userDto);
-		
-		return userDto;
+		if(user.getUsername().equals(userDto.getUsername())) {
+			this.userRepository.save(UserMapper.dtoToEntity(userDto));
+			
+			LOG.info("User edited: {}", userDto);
+			
+			return userDto;
+		} else {
+			LOG.error("UserDto: {} is incompatible with User: {}", userDto, user);
+			
+			throw new InvalidUsernameException("Bad request", "Username from userDto provided does not match with user entity username.");
+		}
 	}
 	
 	@Override

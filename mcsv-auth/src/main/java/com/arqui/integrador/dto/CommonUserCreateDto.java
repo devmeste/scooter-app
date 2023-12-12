@@ -40,5 +40,4 @@ public class CommonUserCreateDto extends UserCreateDto{
 		this.cellphone = cellphone;
 		this.email = email;
 	}
-	
 }

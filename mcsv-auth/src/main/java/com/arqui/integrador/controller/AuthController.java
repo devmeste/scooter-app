@@ -68,10 +68,10 @@ public class AuthController implements IAuthController{
 	}
 	
 	@Override
-	public ResponseEntity<HttpStatus> register(CommonUserCreateDto commonUser) {
+	public ResponseEntity<HttpStatus> register(CommonUserCreateDto commonUser, String token) {
 		LOG.info("Register user: {}", commonUser.toString());
 		
-		this.authService.register(commonUser);
+		this.authService.register(commonUser, token);
 		
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
