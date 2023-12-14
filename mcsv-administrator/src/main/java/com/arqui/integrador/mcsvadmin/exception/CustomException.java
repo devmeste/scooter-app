@@ -1,4 +1,4 @@
-package com.arqui.integrador.mcsvadministrator.exception;
+package com.arqui.integrador.mcsvadmin.exception;
 
 import org.springframework.http.HttpStatus;
 

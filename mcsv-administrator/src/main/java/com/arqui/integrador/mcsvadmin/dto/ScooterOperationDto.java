@@ -1,4 +1,4 @@
-package com.arqui.integrador.mcsvadministrator.dto;
+package com.arqui.integrador.mcsvadmin.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-public class ScooterOperationDTO {
+public class ScooterOperationDto {
     private Boolean enabled;
     private Long quantity;
 }

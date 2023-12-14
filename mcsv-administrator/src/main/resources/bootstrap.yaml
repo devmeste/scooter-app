@@ -1,13 +1,13 @@
 spring:
  datasource:
-  url: jdbc:mysql://localhost:3306/arqui_tpe_administrator?createDatabaseIfNotExist=true
-  username: root
-  password: admin
+  url: jdbc:postgresql://127.0.0.1:5432/mcsv-admin
+  username: postgres
+  password: Mestelan2610
  jpa:
   hibernate:
    ddl-auto: update
  application:
-  name: mcsv-administrator
+  name: mcsv-admin
  cloud:
   config:
    enabled: true

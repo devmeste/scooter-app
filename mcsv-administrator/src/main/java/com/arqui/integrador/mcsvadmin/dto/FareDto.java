@@ -1,4 +1,4 @@
-package com.arqui.integrador.mcsvadministrator.dto;
+package com.arqui.integrador.mcsvadmin.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties
-public class FareDTO implements Serializable{
+public class FareDto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private BigDecimal price_by_hour;
