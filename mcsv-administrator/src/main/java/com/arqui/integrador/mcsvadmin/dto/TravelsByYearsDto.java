@@ -1,6 +1,4 @@
-package com.arqui.integrador.mcsvadministrator.dto;
-
-import java.time.LocalDate;
+package com.arqui.integrador.mcsvadmin.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FareNewPriceDTO {
-    private LocalDate date;
-    private double price;
+public class TravelsByYearsDto {
+    private int id_scooter;
+    private Long travel_quantity;
 }
