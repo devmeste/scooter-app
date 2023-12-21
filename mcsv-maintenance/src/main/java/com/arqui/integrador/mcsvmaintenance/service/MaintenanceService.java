@@ -4,6 +4,8 @@ import static com.arqui.integrador.mcsvmaintenance.util.MaintenanceMapper.dtoToE
 import static com.arqui.integrador.mcsvmaintenance.util.MaintenanceMapper.entityToDto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -56,8 +58,10 @@ public class MaintenanceService implements IMaintenanceService {
     }
 
     @Override
-    public MaintenanceDto create(MaintenanceDto maintenanceDTO) {
-        Maintenance response = this.maintenanceRepository.save(dtoToEntity(maintenanceDTO));
+    public MaintenanceDto create(MaintenanceDto maintenanceDto) {
+        Maintenance response = this.maintenanceRepository.save(dtoToEntity(maintenanceDto));
+        
+        this.scooterFeignClient.disableScooter(maintenanceDto.getScooterId());
 
         LOG.info("Maintenance created: {}", response);
 
@@ -65,21 +69,23 @@ public class MaintenanceService implements IMaintenanceService {
     }
 
     @Override
-    public MaintenanceDto update(Long id, MaintenanceDto maintenanceDTO) {
+    public MaintenanceDto update(Long id, MaintenanceDto maintenanceDto) {
         Maintenance maintenance = this.findById(id);
 
-        maintenanceDTO.setMaintenanceId(maintenance.getMaintenanceId());
+        maintenanceDto.setMaintenanceId(maintenance.getMaintenanceId());
 
-        this.maintenanceRepository.save(dtoToEntity(maintenanceDTO));
+        this.maintenanceRepository.save(dtoToEntity(maintenanceDto));
 
-        LOG.info("Maintenance updated: {}", maintenanceDTO);
+        LOG.info("Maintenance updated: {}", maintenanceDto);
 
-        return maintenanceDTO;
+        return maintenanceDto;
     }
 
     @Override
     public void delete(Long id) {
         Maintenance maintenance = this.findById(id);
+        
+        this.scooterFeignClient.enableScooters(Arrays.asList(maintenance.getScooterId()));
 
         this.maintenanceRepository.delete(maintenance);
 
@@ -101,6 +107,8 @@ public class MaintenanceService implements IMaintenanceService {
 
     @Override
     public void finalizeMaintenance(List<Long> ids) {
+    	List<Long> scooterIds = new ArrayList<>();
+    	
     	ids.forEach(id -> {
     		Maintenance m = this.findById(id);
     		
@@ -108,8 +116,12 @@ public class MaintenanceService implements IMaintenanceService {
     		
     		this.maintenanceRepository.save(m);
     		
+    		scooterIds.add(m.getScooterId());
+    		
     		LOG.info("Maintenance finalized: {}", m);
     	});
+    	
+    	this.scooterFeignClient.enableScooters(scooterIds);
     }
     
     private Maintenance findById(Long id) {

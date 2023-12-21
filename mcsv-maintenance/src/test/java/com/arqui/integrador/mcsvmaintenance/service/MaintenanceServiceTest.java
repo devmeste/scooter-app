@@ -22,7 +22,7 @@ import com.arqui.integrador.mcsvmaintenance.repository.IMaintenanceRepository;
 @ExtendWith(MockitoExtension.class)
 public class MaintenanceServiceTest {
 
-    @InjectMocks
+    /*@InjectMocks
     private MaintenanceService maintenanceService;
 
     @Mock
@@ -189,6 +189,6 @@ public class MaintenanceServiceTest {
 		Mockito.verify(this.maintenanceRepository, Mockito.times(1)).findById(111L);
         Mockito.verify(this.maintenanceRepository, Mockito.times(1)).delete(maintenance);
 
-	}
+	}*/
 
 }

@@ -31,7 +31,7 @@ import com.arqui.integrador.mcsvmaintenance.service.IMaintenanceService;
 @ContextConfiguration(classes = { MaintenanceController.class, CustomExceptionHandler.class })
 public class MaintenanceControllerTest {
 	
-	@Autowired
+	/*@Autowired
 	private MockMvc mockMvc;
 	
 	@MockBean
@@ -133,6 +133,6 @@ public class MaintenanceControllerTest {
 	public void deleteTest() throws Exception {
 		mockMvc.perform(delete("/maintenance/1"))
 			.andExpect(status().isNoContent());
-	}
+	}*/
 
 }

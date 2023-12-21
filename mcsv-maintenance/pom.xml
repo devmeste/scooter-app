@@ -78,11 +78,6 @@
 		    <version>1.4.7.RELEASE</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.arqui.integrador</groupId>
-			<artifactId>mcsv-scooter</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
