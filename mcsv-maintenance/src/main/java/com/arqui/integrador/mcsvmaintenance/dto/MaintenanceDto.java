@@ -12,22 +12,20 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MaintenanceDTO {
-    
-
-    
-    private long id_maintenance;
+public class MaintenanceDto {
+	
+    private long maintenanceId;
 
     @NotNull
-	private LocalDate start_date;
+	private LocalDate startDate;
 
-	private LocalDate end_date;
+	private LocalDate endDate;
 
     @NotNull
-    private Long id_scooter;
+    private Long scooterId;
     
     @NotNull
-    private float scooter_km;
+    private float scooterKms;
     
 }
 

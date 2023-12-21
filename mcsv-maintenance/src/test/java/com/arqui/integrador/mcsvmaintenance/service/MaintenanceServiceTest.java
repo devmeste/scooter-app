@@ -14,7 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
-import com.arqui.integrador.mcsvmaintenance.dto.MaintenanceDTO;
+import com.arqui.integrador.mcsvmaintenance.dto.MaintenanceDto;
 import com.arqui.integrador.mcsvmaintenance.exception.ItemNotFoundException;
 import com.arqui.integrador.mcsvmaintenance.model.Maintenance;
 import com.arqui.integrador.mcsvmaintenance.repository.IMaintenanceRepository;
@@ -43,7 +43,7 @@ public class MaintenanceServiceTest {
 
         Mockito.when(this.maintenanceRepository.findAll()).thenReturn(maintenances);
 
-        List<MaintenanceDTO> maintenanceDTOs = this.maintenanceService.getAll();
+        List<MaintenanceDto> maintenanceDTOs = this.maintenanceService.getAll();
 
         Mockito.verify(this.maintenanceRepository, Mockito.times(1)).findAll();
 
@@ -68,7 +68,7 @@ public class MaintenanceServiceTest {
 
         Mockito.when(this.maintenanceRepository.findById(34037899L)).thenReturn(Optional.of(maintenance));
 
-        MaintenanceDTO maintenanceDTO = this.maintenanceService.getById(34037899L);
+        MaintenanceDto maintenanceDTO = this.maintenanceService.getById(34037899L);
 
         Mockito.verify(this.maintenanceRepository, Mockito.times(1)).findById(34037899L);
 
@@ -113,7 +113,7 @@ public class MaintenanceServiceTest {
                 .scooter_km(45.5f)
                 .build();
 		
-		MaintenanceDTO maintenanceDtoRequest = MaintenanceDTO.builder()
+		MaintenanceDto maintenanceDtoRequest = MaintenanceDto.builder()
 				.id_maintenance(34037899L)
                 .id_maintenance(111)
                 .start_date(LocalDate.of(2023, 1, 1))
@@ -124,7 +124,7 @@ public class MaintenanceServiceTest {
 		
 		Mockito.when(this.maintenanceRepository.save(maintenance)).thenReturn(maintenance);
 		
-		MaintenanceDTO maintenanceDtoResponse = this.maintenanceService.create(maintenanceDtoRequest);
+		MaintenanceDto maintenanceDtoResponse = this.maintenanceService.create(maintenanceDtoRequest);
 		
 		Mockito.verify(this.maintenanceRepository, Mockito.times(1)).save(maintenance);
 		
@@ -150,7 +150,7 @@ public class MaintenanceServiceTest {
                 .scooter_km(45.5f)
                 .build();
 		
-		MaintenanceDTO maintenanceEditedDto = MaintenanceDTO.builder()
+		MaintenanceDto maintenanceEditedDto = MaintenanceDto.builder()
                 .id_maintenance(111L)
                 .start_date(LocalDate.of(2023, 1, 1))
                 .end_date(LocalDate.of(2023, 1, 2))
@@ -161,7 +161,7 @@ public class MaintenanceServiceTest {
 		Mockito.when(this.maintenanceRepository.findById(111L)).thenReturn(Optional.of(maintenance));
 		Mockito.when(this.maintenanceRepository.save(maintenanceEdited)).thenReturn(maintenanceEdited);
 		
-		MaintenanceDTO maintenanceDto = this.maintenanceService.update(111L, maintenanceEditedDto);
+		MaintenanceDto maintenanceDto = this.maintenanceService.update(111L, maintenanceEditedDto);
 		
 		Mockito.verify(this.maintenanceRepository, Mockito.times(1)).save(maintenanceEdited);
 		

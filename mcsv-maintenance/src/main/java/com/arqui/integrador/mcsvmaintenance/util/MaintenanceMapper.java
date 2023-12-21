@@ -1,29 +1,27 @@
 package com.arqui.integrador.mcsvmaintenance.util;
 
-import com.arqui.integrador.mcsvmaintenance.dto.MaintenanceDTO;
+import com.arqui.integrador.mcsvmaintenance.dto.MaintenanceDto;
 import com.arqui.integrador.mcsvmaintenance.model.Maintenance;
 
 public class MaintenanceMapper {
     
-    public static MaintenanceDTO entityToDto(Maintenance maintenance) {
-        return MaintenanceDTO.builder()
-                .id_maintenance(maintenance.getId_maintenance())
-                .start_date(maintenance.getStart_date())
-                .end_date(maintenance.getEnd_date())
-                .id_scooter(maintenance.getId_scooter())
-                .scooter_km(maintenance.getScooter_km())
-                // .scooter_usage_time(maintenance.getScooter_usage_time())
+    public static MaintenanceDto entityToDto(Maintenance maintenance) {
+        return MaintenanceDto.builder()
+                .maintenanceId(maintenance.getMaintenanceId())
+                .startDate(maintenance.getStartDate())
+                .endDate(maintenance.getEndDate())
+                .scooterId(maintenance.getScooterId())
+                .scooterKms(maintenance.getScooterKms())
                 .build();
     }
     
-    public static Maintenance dtoToEntity(MaintenanceDTO maintenanceDto) {
+    public static Maintenance dtoToEntity(MaintenanceDto maintenanceDto) {
         return Maintenance.builder()
-                .id_maintenance(maintenanceDto.getId_maintenance())
-                .start_date(maintenanceDto.getStart_date())
-                .end_date(maintenanceDto.getEnd_date())
-                .id_scooter(maintenanceDto.getId_scooter())
-                .scooter_km(maintenanceDto.getScooter_km())
-                // .scooter_usage_time(maintenanceDto.getScooter_usage_time())
+                .maintenanceId(maintenanceDto.getMaintenanceId())
+                .startDate(maintenanceDto.getStartDate())
+                .endDate(maintenanceDto.getEndDate())
+                .scooterId(maintenanceDto.getScooterId())
+                .scooterKms(maintenanceDto.getScooterKms())
                 .build();
     }
 }

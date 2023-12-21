@@ -9,7 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.arqui.integrador.mcsvmaintenance.dto.MaintenanceDTO;
+import com.arqui.integrador.mcsvmaintenance.dto.MaintenanceDto;
+import com.arqui.integrador.mcsvmaintenance.dto.ScooterReportDto;
 import com.arqui.integrador.mcsvmaintenance.service.IMaintenanceService;
 
 import jakarta.validation.Valid;
@@ -25,8 +26,8 @@ public class MaintenanceController implements IMaintenanceController {
     }
 
     @Override
-    public ResponseEntity<List<MaintenanceDTO>> getAll() {
-        List<MaintenanceDTO> response = this.maintenanceService.getAll();
+    public ResponseEntity<List<MaintenanceDto>> getAll() {
+        List<MaintenanceDto> response = this.maintenanceService.getAll();
 
         LOG.info("Getting all maintenances: {}", response);
 
@@ -34,8 +35,8 @@ public class MaintenanceController implements IMaintenanceController {
     }
 
     @Override
-    public ResponseEntity<MaintenanceDTO> create(@Valid MaintenanceDTO maintenenceDto) {
-        MaintenanceDTO response = this.maintenanceService.create(maintenenceDto);
+    public ResponseEntity<MaintenanceDto> create(@Valid MaintenanceDto maintenenceDto) {
+        MaintenanceDto response = this.maintenanceService.create(maintenenceDto);
 
         LOG.info("Creating maitenance : {}", response);
 
@@ -43,41 +44,42 @@ public class MaintenanceController implements IMaintenanceController {
     }
 
     @Override
-    public ResponseEntity<MaintenanceDTO> getById(Long id) {
-        MaintenanceDTO response = this.maintenanceService.getById(id);
-
-        LOG.info("Getting maitenance by id: {}", response);
+    public ResponseEntity<MaintenanceDto> getById(Long id) {
+    	LOG.info("Getting maitenance by id: {}", id);
+    	
+        MaintenanceDto response = this.maintenanceService.getById(id);
 
         return ResponseEntity.ok(response);
 
     }
 
     @Override
-    public ResponseEntity<MaintenanceDTO> update(Long id, @Valid MaintenanceDTO maintenenceDto) {
-        MaintenanceDTO response = this.maintenanceService.update(id, maintenenceDto);
-
-        LOG.info("Updating maitenance: {} with id: {}", maintenenceDto, id);
+    public ResponseEntity<MaintenanceDto> update(Long id, @Valid MaintenanceDto maintenenceDto) {
+    	LOG.info("Updating maitenance: {} with id: {}", maintenenceDto, id);
+    	
+        MaintenanceDto response = this.maintenanceService.update(id, maintenenceDto);
 
         return ResponseEntity.ok(response);
     }
 
     @Override
     public void delete(Long id) {
-        this.maintenanceService.delete(id);
-        LOG.info("Deletin maintenance with id : {}", id);
+    	LOG.info("Deleting maintenance with id : {}", id);
+
+    	this.maintenanceService.delete(id);
     }
 
     @Override
-    public List<Long> getScootersForMaintenance( Boolean available) {
-        return this.maintenanceService.getScootersForMaintenance(available);
+    public List<ScooterReportDto> getMaintenanceReport(Boolean available) {
+    	LOG.info("Getting maintenance report");
+    	
+        return this.maintenanceService.getMaintenanceReport(available);
     }
 
     @Override
-    public ResponseEntity<MaintenanceDTO> finalizeMaintenance(Long id) {
-        MaintenanceDTO response = this.maintenanceService.finalizeMaintenance(id);
-
-        LOG.info("Updating finalization maitenance with id: {}", id);
-
-        return ResponseEntity.ok(response);
+    public void finalizeMaintenance(List<Long> ids) {
+    	LOG.info("Finalizing maintenance of scooters with ids: {}", ids);
+    	
+        this.maintenanceService.finalizeMaintenance(ids);
     }
 }

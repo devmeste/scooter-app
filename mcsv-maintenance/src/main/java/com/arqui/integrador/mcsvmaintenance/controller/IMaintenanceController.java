@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.arqui.integrador.mcsvmaintenance.dto.MaintenanceDTO;
+import com.arqui.integrador.mcsvmaintenance.dto.MaintenanceDto;
+import com.arqui.integrador.mcsvmaintenance.dto.ScooterReportDto;
 
 import jakarta.validation.Valid;
 
@@ -26,35 +27,34 @@ public interface IMaintenanceController {
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<List<MaintenanceDTO>> getAll();
+	public ResponseEntity<List<MaintenanceDto>> getAll();
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	ResponseEntity<MaintenanceDTO> getById(@PathVariable(name = "id") Long id);
+	ResponseEntity<MaintenanceDto> getById(@PathVariable(name = "id") Long id);
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
-	ResponseEntity<MaintenanceDTO> create(@Valid @RequestBody MaintenanceDTO maintenenceDto);
+	ResponseEntity<MaintenanceDto> create(@Valid @RequestBody MaintenanceDto maintenenceDto);
 
 	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	ResponseEntity<MaintenanceDTO> update(@PathVariable(name = "id") Long id,
-			@Valid @RequestBody MaintenanceDTO maintenenceDto);
+	ResponseEntity<MaintenanceDto> update(@PathVariable(name = "id") Long id,
+			@Valid @RequestBody MaintenanceDto maintenenceDto);
 
 	@DeleteMapping(value = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void delete(@PathVariable(name = "id") Long id);
 
-	@GetMapping(value = "/scooters/for-maintenance")
+	@GetMapping(value = "/scooters/report")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	List<Long> getScootersForMaintenance(@RequestParam (value = "available") Boolean available);
+	List<ScooterReportDto> getMaintenanceReport(@RequestParam(value = "pause-time", defaultValue = "true") Boolean available);
 
-	@PutMapping(value = "/finalize/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseStatus(HttpStatus.OK)
-	ResponseEntity<MaintenanceDTO> finalizeMaintenance(@PathVariable(name = "id") Long id  );
-
+	@PutMapping(value = "/finalize", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	void finalizeMaintenance(@RequestBody List<Long> id);
 }

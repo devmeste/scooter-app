@@ -12,9 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ScooterReportDTO {
+	
 	private Long id;
+	
 	@NotNull
 	private Float kmsTraveled;
+	
 	private Long pauseTime;
 	
 	public ScooterReportDTO(Long id, Float kmsTraveled) {
