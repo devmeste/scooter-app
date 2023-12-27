@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class ScooterDTO {
+public class ScooterDto {
 	
 	private Long id;
 	@NotNull

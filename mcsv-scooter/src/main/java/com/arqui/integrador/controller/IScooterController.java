@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.arqui.integrador.dto.ScooterDTO;
-import com.arqui.integrador.dto.ScooterListDTO;
-import com.arqui.integrador.dto.ScooterNearestDTO;
-import com.arqui.integrador.dto.ScooterOperationDTO;
-import com.arqui.integrador.dto.ScooterReportDTO;
+import com.arqui.integrador.dto.ScooterDto;
+import com.arqui.integrador.dto.ScooterNearestDto;
+import com.arqui.integrador.dto.ScooterOperationDto;
+import com.arqui.integrador.dto.ScooterReportDto;
 
 import jakarta.validation.Valid;
 
@@ -32,45 +31,49 @@ public interface IScooterController {
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	ResponseEntity<List<ScooterDTO>> getAll(
+	ResponseEntity<List<ScooterDto>> getAll(
 			@RequestParam(value = "orderBy", defaultValue = "id") String order,
 			@RequestParam(value = "available", required = false) Boolean available);
 	
 	@GetMapping(value = "/report" ,produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	ResponseEntity<List<ScooterReportDTO>> getScooterReport(@RequestParam(value = "pause-time", defaultValue = "false") Boolean pause_time);
+	ResponseEntity<List<ScooterReportDto>> getScooterReport(@RequestParam(value = "pause-time", defaultValue = "false") Boolean pause_time);
 	
 	@GetMapping(value = "/in-operation", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	ResponseEntity<List<ScooterOperationDTO>> getScooterInOperation();
+	ResponseEntity<List<ScooterOperationDto>> getScooterInOperation();
 	
 	@GetMapping(value = "/nearest/lat/{lat}/long/{long}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	ResponseEntity<List<ScooterNearestDTO>> getNearestScooters(@PathVariable("lat") double latitude, @PathVariable("long") double longitude);
+	ResponseEntity<List<ScooterNearestDto>> getNearestScooters(@PathVariable("lat") double latitude, @PathVariable("long") double longitude);
 	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	ResponseEntity<ScooterDTO> getById(@PathVariable("id") Long id);
+	ResponseEntity<ScooterDto> getById(@PathVariable("id") Long id);
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	ResponseEntity<ScooterDTO> add(@RequestBody @Valid ScooterDTO scooter);
+	ResponseEntity<ScooterDto> add(@RequestBody @Valid ScooterDto scooter);
 	
 	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	ResponseEntity<ScooterDTO> update(@PathVariable("id") Long id,@RequestBody @Valid ScooterDTO scooter);
-	
-	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseStatus(HttpStatus.OK)
-	void updateScootersMaintenance(@RequestBody @Valid ScooterListDTO ids);
+	ResponseEntity<ScooterDto> update(@PathVariable("id") Long id,@RequestBody @Valid ScooterDto scooter);
 	
 	@DeleteMapping(value = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	void delete(@PathVariable("id") Long id);
+	
+	@PutMapping(value = "/enable-scooters", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	void enableScooters(List<Long> scooterIds);
+	
+	@PutMapping(value = "/disable-scooter", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	void disableScooter(Long scooterId);
 }

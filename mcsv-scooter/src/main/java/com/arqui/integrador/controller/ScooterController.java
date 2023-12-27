@@ -2,20 +2,16 @@ package com.arqui.integrador.controller;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
-import com.arqui.integrador.dto.ScooterDTO;
-import com.arqui.integrador.dto.ScooterListDTO;
-import com.arqui.integrador.dto.ScooterNearestDTO;
-import com.arqui.integrador.dto.ScooterOperationDTO;
-import com.arqui.integrador.dto.ScooterReportDTO;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.arqui.integrador.dto.ScooterDto;
+import com.arqui.integrador.dto.ScooterNearestDto;
+import com.arqui.integrador.dto.ScooterOperationDto;
+import com.arqui.integrador.dto.ScooterReportDto;
 import com.arqui.integrador.service.IScooterService;
 
 @RestController
@@ -30,23 +26,23 @@ public class ScooterController implements IScooterController {
 	}
 
 	@Override
-	public ResponseEntity<List<ScooterDTO>> getAll(String order, Boolean available) {
+	public ResponseEntity<List<ScooterDto>> getAll(String order, Boolean available) {
 		if(available!=null) {
 			if(available) {
-				List<ScooterDTO> response = this.scooterService.getAllAvailable(order);
+				List<ScooterDto> response = this.scooterService.getAllAvailable(order);
 				
 				LOG.info("Getting all enable scooters: {} order by: {}", response, order);
 				
 				return ResponseEntity.ok(response);
 			}else {
-				List<ScooterDTO> response = this.scooterService.getAllDisable(order);
+				List<ScooterDto> response = this.scooterService.getAllDisable(order);
 				
 				LOG.info("Getting all disable scooters: {} order by: {}", response, order);
 				
 				return ResponseEntity.ok(response);
 			}
 		}else {
-			List<ScooterDTO> response = this.scooterService.getAll(order);
+			List<ScooterDto> response = this.scooterService.getAll(order);
 			
 			LOG.info("Getting all scooters: {} order by: {}", response, order);
 				
@@ -56,9 +52,9 @@ public class ScooterController implements IScooterController {
 	}
 
 	@Override
-	public ResponseEntity<ScooterDTO> getById(Long id) {
+	public ResponseEntity<ScooterDto> getById(Long id) {
 		
-		ScooterDTO response = this.scooterService.getById(id);
+		ScooterDto response = this.scooterService.getById(id);
 		
 		LOG.info("Getting scooters by id: {}", id);
 		
@@ -66,9 +62,9 @@ public class ScooterController implements IScooterController {
 	}
 
 	@Override
-	public ResponseEntity<ScooterDTO> add(ScooterDTO scooter) {
+	public ResponseEntity<ScooterDto> add(ScooterDto scooter) {
 		
-		ScooterDTO response = this.scooterService.add(scooter);
+		ScooterDto response = this.scooterService.add(scooter);
 		
 		LOG.info("Creating scooter with request body: {}", scooter);
 		
@@ -76,7 +72,7 @@ public class ScooterController implements IScooterController {
 	}
 
 	@Override
-	public ResponseEntity<ScooterDTO> update(Long id, ScooterDTO scooter) {
+	public ResponseEntity<ScooterDto> update(Long id, ScooterDto scooter) {
 		
 		LOG.info("Editing scooter by id: {} with request body: {}", id, scooter);
 		
@@ -93,9 +89,9 @@ public class ScooterController implements IScooterController {
 	}
 
 	@Override
-	public ResponseEntity<List<ScooterReportDTO>> getScooterReport(Boolean pause_time) {
+	public ResponseEntity<List<ScooterReportDto>> getScooterReport(Boolean pause_time) {
 		
-		List<ScooterReportDTO> response = this.scooterService.getScooterReport(pause_time);
+		List<ScooterReportDto> response = this.scooterService.getScooterReport(pause_time);
 		
 		LOG.info("Getting all scooters for report: {}", response);
 		
@@ -103,8 +99,8 @@ public class ScooterController implements IScooterController {
 	}
 
 	@Override
-	public ResponseEntity<List<ScooterOperationDTO>> getScooterInOperation() {
-		List<ScooterOperationDTO> response = this.scooterService.getScooterInOperation();
+	public ResponseEntity<List<ScooterOperationDto>> getScooterInOperation() {
+		List<ScooterOperationDto> response = this.scooterService.getScooterInOperation();
 		
 		LOG.info("Getting quantity of scooters in operation and disabled: {}", response);
 		
@@ -112,20 +108,25 @@ public class ScooterController implements IScooterController {
 	}
 
 	@Override
-	public ResponseEntity<List<ScooterNearestDTO>> getNearestScooters(double latitude, double longitude){
-		List<ScooterNearestDTO> response = this.scooterService.getNearestScooters(latitude, longitude);
+	public ResponseEntity<List<ScooterNearestDto>> getNearestScooters(double latitude, double longitude){
+		List<ScooterNearestDto> response = this.scooterService.getNearestScooters(latitude, longitude);
 		
 		LOG.info("Getting nearest scooters: {}", response);
 		
 		return ResponseEntity.ok(response);
 	}
-
+	
 	@Override
-	public void updateScootersMaintenance(ScooterListDTO ids) {
-		this.scooterService.updateScootersMaintenance(ids);
+	public void enableScooters(List<Long> scooterIds) {
+		LOG.info("Enable scooters with ids: {}", scooterIds);
 		
-		LOG.info("Updating scooters by id: {}", ids);
-		
+		this.scooterService.enableScooters(scooterIds);
 	}
-
+	
+	@Override
+	public void disableScooter(Long scooterId) {
+		LOG.info("Disable scooter with id: {}", scooterId);
+		
+		this.scooterService.disableScooter(scooterId);
+	}
 }

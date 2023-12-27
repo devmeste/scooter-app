@@ -1,13 +1,13 @@
 package com.arqui.integrador.utils;
 
-import com.arqui.integrador.dto.ScooterDTO;
+import com.arqui.integrador.dto.ScooterDto;
 import com.arqui.integrador.model.Scooter;
 
 public final class ScooterMapper {
 	private ScooterMapper() {}
 	
-	public static ScooterDTO entityToDto(Scooter scooter) {
-		return ScooterDTO.builder()
+	public static ScooterDto entityToDto(Scooter scooter) {
+		return ScooterDto.builder()
 				.id(scooter.getId())
 				.enabled(scooter.isEnabled())
 				.kmsTraveled(scooter.getKmsTraveled())
@@ -18,7 +18,7 @@ public final class ScooterMapper {
 				.build();
 	}
 	
-	public static Scooter dtoToEntity(ScooterDTO scooterDto) {
+	public static Scooter dtoToEntity(ScooterDto scooterDto) {
 		return Scooter.builder()
 				.id(scooterDto.getId())
 				.enabled(scooterDto.isEnabled())
@@ -30,7 +30,7 @@ public final class ScooterMapper {
 				.build();
 	}
 	
-	public static Scooter dtoToEntityNoId(ScooterDTO scooterDto) {
+	public static Scooter dtoToEntityNoId(ScooterDto scooterDto) {
 		return Scooter.builder()
 				.enabled(scooterDto.isEnabled())
 				.kmsTraveled(scooterDto.getKmsTraveled())

@@ -94,7 +94,6 @@ public class MaintenanceService implements IMaintenanceService {
 
     @Override
     public List<ScooterReportDto> getMaintenanceReport(Boolean available) {
-    	
     	ResponseEntity<List<ScooterReportDto>> response = this.scooterFeignClient.getScooterReport(available);
 
         if (response.getStatusCode().is2xxSuccessful()) {

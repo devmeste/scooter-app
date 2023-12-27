@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScooterNearestDTO {
+public class ScooterNearestDto {
 	
 	private Long id;
 	@NotNull

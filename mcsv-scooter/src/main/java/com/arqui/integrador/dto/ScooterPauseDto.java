@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ScooterPauseDTO {
+public class ScooterPauseDto {
 	@JsonProperty("id_scooter")
 	private Long id;
 	@NotNull

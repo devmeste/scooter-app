@@ -1,6 +1,7 @@
 package com.arqui.integrador.dto;
 
-import jakarta.validation.constraints.NotNull;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScooterOperationDTO {
-	private Long quantity;
-	@NotNull
-	private Boolean enabled;
+public class ScooterListDto {
+	private List<Long> list;
 }

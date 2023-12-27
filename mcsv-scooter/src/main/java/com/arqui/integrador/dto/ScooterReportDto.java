@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScooterReportDTO {
+public class ScooterReportDto {
 	
 	private Long id;
 	
@@ -20,7 +20,7 @@ public class ScooterReportDTO {
 	
 	private Long pauseTime;
 	
-	public ScooterReportDTO(Long id, Float kmsTraveled) {
+	public ScooterReportDto(Long id, Float kmsTraveled) {
         this.id = id;
         this.kmsTraveled = kmsTraveled;
     }
