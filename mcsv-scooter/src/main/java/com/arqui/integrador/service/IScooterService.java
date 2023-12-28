@@ -2,34 +2,35 @@ package com.arqui.integrador.service;
 
 import java.util.List;
 
-import com.arqui.integrador.dto.ScooterDTO;
-import com.arqui.integrador.dto.ScooterListDTO;
-import com.arqui.integrador.dto.ScooterNearestDTO;
-import com.arqui.integrador.dto.ScooterOperationDTO;
-import com.arqui.integrador.dto.ScooterReportDTO;
+import com.arqui.integrador.dto.ScooterDto;
+import com.arqui.integrador.dto.ScooterNearestDto;
+import com.arqui.integrador.dto.ScooterOperationDto;
+import com.arqui.integrador.dto.ScooterReportDto;
 
 public interface IScooterService {
 
-	List<ScooterDTO> getAll(String order);
+	List<ScooterDto> getAll(String order);
 
-	ScooterDTO getById(Long id);
+	ScooterDto getById(Long id);
 
-	ScooterDTO add(ScooterDTO scooter);
+	ScooterDto add(ScooterDto scooter);
 
-	ScooterDTO update(Long id, ScooterDTO scooter);
+	ScooterDto update(Long id, ScooterDto scooter);
 
 	void delete(Long id);
 
-	List<ScooterReportDTO> getScooterReport(Boolean pause_time);
+	List<ScooterReportDto> getScooterReport(Boolean pause_time);
 
-	List<ScooterOperationDTO> getScooterInOperation();
+	List<ScooterOperationDto> getScooterInOperation();
 	
-	List<ScooterNearestDTO> getNearestScooters(double latitude, double longitude);
+	List<ScooterNearestDto> getNearestScooters(double latitude, double longitude);
 
-	List<ScooterDTO> getAllAvailable(String order);
+	List<ScooterDto> getAllAvailable(String order);
 	
-	List<ScooterDTO> getAllDisable(String order);
+	List<ScooterDto> getAllDisable(String order);
 	
-	void updateScootersMaintenance(ScooterListDTO ids);
+	void enableScooters(List<Long> scooterIds);
+	
+	void disableScooter(Long scooterId);
 
 }

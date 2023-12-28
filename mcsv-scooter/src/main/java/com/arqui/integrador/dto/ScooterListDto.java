@@ -1,4 +1,4 @@
-package com.arqui.integrador.mcsvmaintenance.dto;
+package com.arqui.integrador.dto;
 
 import java.util.List;
 
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class ListOfIdsToUpdateDTO {
-    private List<Long> list;
-     
+@NoArgsConstructor
+public class ScooterListDto {
+	private List<Long> list;
 }

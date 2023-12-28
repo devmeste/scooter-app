@@ -10,14 +10,20 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScooterNearestDTO {
+
+public class ScooterDto {
 	
 	private Long id;
+	@NotNull
+	private boolean enabled;
+	@NotNull
+	private float kmsTraveled;
+	@NotNull
+	private float usedTime;
 	@NotNull
 	private double latitude;
 	@NotNull
 	private double longitude;
 	@NotNull
 	private Long stationId;
-	
 }

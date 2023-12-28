@@ -1,6 +1,5 @@
 package com.arqui.integrador.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,15 +10,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScooterReportDTO {
+public class ScooterNearestDto {
+	
 	private Long id;
 	@NotNull
-	private Float kmsTraveled;
-	private Long pauseTime;
-	
-	public ScooterReportDTO(Long id, Float kmsTraveled) {
-        this.id = id;
-        this.kmsTraveled = kmsTraveled;
-    }
+	private double latitude;
+	@NotNull
+	private double longitude;
+	@NotNull
+	private Long stationId;
 	
 }

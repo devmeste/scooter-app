@@ -27,14 +27,13 @@ public class Maintenance implements Serializable{
 	@Id
     @Column(name = "maintenance_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id_maintenance;
+    private long maintenanceId;
 
-	private LocalDate start_date;
+	private LocalDate startDate;
  
-	private LocalDate end_date;
+	private LocalDate endDate;
 
-    private Long id_scooter;
+    private Long scooterId;
 
-    private float scooter_km;
-
+    private float scooterKms;
 }

@@ -2,23 +2,22 @@ package com.arqui.integrador.mcsvmaintenance.service;
 
 import java.util.List;
 
-
-import com.arqui.integrador.mcsvmaintenance.dto.MaintenanceDTO;
+import com.arqui.integrador.mcsvmaintenance.dto.MaintenanceDto;
+import com.arqui.integrador.mcsvmaintenance.dto.ScooterReportDto;
 
 public interface IMaintenanceService {
     
-    List<MaintenanceDTO> getAll();
+    List<MaintenanceDto> getAll();
 	
-	MaintenanceDTO getById(Long id);
+	MaintenanceDto getById(Long id);
 	
-	MaintenanceDTO create(MaintenanceDTO maintenanceDTO);
+	MaintenanceDto create(MaintenanceDto maintenanceDTO);
 	
-	MaintenanceDTO update(Long id, MaintenanceDTO maintenanceDTO);
+	MaintenanceDto update(Long id, MaintenanceDto maintenanceDTO);
 		
 	void delete(Long id);
 
-    List<Long> getScootersForMaintenance( Boolean available);
+    List<ScooterReportDto> getMaintenanceReport(Boolean available);
 
-   MaintenanceDTO finalizeMaintenance(Long id);
-	
+    void finalizeMaintenance(List<Long> id);
 }

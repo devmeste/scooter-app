@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ScooterOperationDTO {
+public class ScooterOperationDto {
 	private Long quantity;
 	@NotNull
 	private Boolean enabled;
