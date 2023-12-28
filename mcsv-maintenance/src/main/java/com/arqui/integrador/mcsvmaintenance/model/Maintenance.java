@@ -36,5 +36,4 @@ public class Maintenance implements Serializable{
     private Long scooterId;
 
     private float scooterKms;
-
 }

@@ -19,6 +19,7 @@ import jakarta.validation.Valid;
 public class MaintenanceController implements IMaintenanceController {
 
     private static final Logger LOG = LoggerFactory.getLogger(MaintenanceController.class);
+    
     private IMaintenanceService maintenanceService;
 
     public MaintenanceController(IMaintenanceService maintenanceService) {
@@ -27,35 +28,34 @@ public class MaintenanceController implements IMaintenanceController {
 
     @Override
     public ResponseEntity<List<MaintenanceDto>> getAll() {
+    	LOG.info("Getting all maintenances");
+    	
         List<MaintenanceDto> response = this.maintenanceService.getAll();
-
-        LOG.info("Getting all maintenances: {}", response);
 
         return ResponseEntity.ok(response);
     }
 
     @Override
     public ResponseEntity<MaintenanceDto> create(@Valid MaintenanceDto maintenenceDto) {
+    	LOG.info("Creating maintenance: {}", maintenenceDto);
+    	
         MaintenanceDto response = this.maintenanceService.create(maintenenceDto);
-
-        LOG.info("Creating maitenance : {}", response);
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<MaintenanceDto> getById(Long id) {
-    	LOG.info("Getting maitenance by id: {}", id);
+    	LOG.info("Getting maintenance by id: {}", id);
     	
         MaintenanceDto response = this.maintenanceService.getById(id);
 
         return ResponseEntity.ok(response);
-
     }
 
     @Override
     public ResponseEntity<MaintenanceDto> update(Long id, @Valid MaintenanceDto maintenenceDto) {
-    	LOG.info("Updating maitenance: {} with id: {}", maintenenceDto, id);
+    	LOG.info("Updating maintenance: {} with id: {}", maintenenceDto, id);
     	
         MaintenanceDto response = this.maintenanceService.update(id, maintenenceDto);
 
@@ -64,7 +64,7 @@ public class MaintenanceController implements IMaintenanceController {
 
     @Override
     public void delete(Long id) {
-    	LOG.info("Deleting maintenance with id : {}", id);
+    	LOG.info("Deleting maintenance with id: {}", id);
 
     	this.maintenanceService.delete(id);
     }

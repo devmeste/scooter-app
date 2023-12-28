@@ -7,13 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.arqui.integrador.mcsvmaintenance.dto.ScooterReportDto;
-
 
 @FeignClient(name = "mcsv-scooter", url = "localhost:8080/scooters")
 public interface IScooterFeignClient {
@@ -27,7 +27,7 @@ public interface IScooterFeignClient {
 	@ResponseStatus(HttpStatus.OK)
 	void enableScooters(List<Long> scooterIds);
 	
-	@PutMapping(value = "/disable-scooter", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "/disable-scooter/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	void disableScooter(Long scooterId);
+	void disableScooter(@PathVariable(name = "id") Long scooterId);
 }

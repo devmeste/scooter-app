@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScooterReportDto {
+	
     private Long scooterId;
     
     private float kmsTraveled;
@@ -21,5 +22,4 @@ public class ScooterReportDto {
     private LocalTime pausedTime;
     
     private boolean available;
-     
 }

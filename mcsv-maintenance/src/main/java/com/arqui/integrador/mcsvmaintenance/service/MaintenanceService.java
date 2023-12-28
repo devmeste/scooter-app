@@ -4,7 +4,6 @@ import static com.arqui.integrador.mcsvmaintenance.util.MaintenanceMapper.dtoToE
 import static com.arqui.integrador.mcsvmaintenance.util.MaintenanceMapper.entityToDto;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -106,8 +105,6 @@ public class MaintenanceService implements IMaintenanceService {
 
     @Override
     public void finalizeMaintenance(List<Long> ids) {
-    	List<Long> scooterIds = new ArrayList<>();
-    	
     	ids.forEach(id -> {
     		Maintenance m = this.findById(id);
     		
@@ -115,12 +112,10 @@ public class MaintenanceService implements IMaintenanceService {
     		
     		this.maintenanceRepository.save(m);
     		
-    		scooterIds.add(m.getScooterId());
-    		
     		LOG.info("Maintenance finalized: {}", m);
     	});
     	
-    	this.scooterFeignClient.enableScooters(scooterIds);
+    	this.scooterFeignClient.enableScooters(ids);
     }
     
     private Maintenance findById(Long id) {

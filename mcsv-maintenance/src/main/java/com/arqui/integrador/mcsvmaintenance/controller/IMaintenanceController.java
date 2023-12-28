@@ -27,7 +27,7 @@ public interface IMaintenanceController {
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<List<MaintenanceDto>> getAll();
+	ResponseEntity<List<MaintenanceDto>> getAll();
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

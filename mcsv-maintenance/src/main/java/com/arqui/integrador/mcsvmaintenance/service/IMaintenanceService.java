@@ -20,5 +20,4 @@ public interface IMaintenanceService {
     List<ScooterReportDto> getMaintenanceReport(Boolean available);
 
     void finalizeMaintenance(List<Long> id);
-	
 }

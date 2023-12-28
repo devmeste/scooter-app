@@ -26,6 +26,5 @@ public class MaintenanceDto {
     
     @NotNull
     private float scooterKms;
-    
 }
 
