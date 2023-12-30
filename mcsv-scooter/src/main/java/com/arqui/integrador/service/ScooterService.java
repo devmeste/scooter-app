@@ -9,19 +9,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.arqui.integrador.dto.ScooterDto;
 import com.arqui.integrador.dto.ScooterNearestDto;
 import com.arqui.integrador.dto.ScooterOperationDto;
-import com.arqui.integrador.dto.ScooterPauseDto;
 import com.arqui.integrador.dto.ScooterReportDto;
 import com.arqui.integrador.exception.ItemNotFoundException;
 import com.arqui.integrador.model.Scooter;
@@ -37,11 +30,8 @@ public class ScooterService implements IScooterService{
 	
 	private IScooterRepository scooterRepository;
 	
-	private RestTemplate restTemplate;
-	
-	public ScooterService(IScooterRepository scooterRepository, RestTemplate restTemplate) {
+	public ScooterService(IScooterRepository scooterRepository) {
 		this.scooterRepository = scooterRepository;
-		this.restTemplate = restTemplate;
 	}
 	
 	@Override
@@ -78,7 +68,7 @@ public class ScooterService implements IScooterService{
 	public ScooterDto update(Long id, ScooterDto scooterDto) {
 		Scooter scooter = this.findById(id);
 		
-		scooterDto.setId(scooter.getId());
+		scooterDto.setId(scooter.getScooterId());
 		
 		this.scooterRepository.save(dtoToEntity(scooterDto));
 		
@@ -97,35 +87,18 @@ public class ScooterService implements IScooterService{
 
 	@Override
 	public List<ScooterReportDto> getScooterReport(Boolean pause_time) {
-		
-		List<ScooterPauseDto> responseMsTravels = new ArrayList<>();
-		
-		List<ScooterReportDto> list = this.scooterRepository.getScooterReport();
+		List<ScooterReportDto> response = new ArrayList<>();
 		
 		if(pause_time) {
-			HttpHeaders headers = new HttpHeaders();
-			HttpEntity<List<Void>> requestEntity = new HttpEntity<>(headers);
-			
-			ResponseEntity<List<ScooterPauseDto>> response = restTemplate.exchange(
-					"lb://mcsv-travel:8080/travels/paused", 
-					HttpMethod.GET, 
-					requestEntity, 
-					new ParameterizedTypeReference<List<ScooterPauseDto>>() {}
-			);
-			if(response.getStatusCode().is2xxSuccessful()) {
-				responseMsTravels.addAll(response.getBody());
-			}
-			
-			for(ScooterReportDto scooter: list) {
-				for(ScooterPauseDto scooterPause: responseMsTravels) {
-					if(scooterPause.getId().equals(scooter.getId())) {
-						scooter.setPauseTime(scooterPause.getPauseTime());
-					}
-				}
-			}
+			response = this.scooterRepository.getScooterReportWithPause();
+			response.forEach(e -> {
+				e.setTotalTime(e.getUsedTime() + e.getPausedTime());
+			});
+		} else {
+			response = this.scooterRepository.getScooterReport();
 		}
 		
-		return list;
+		return response;
 	}
 
 	@Override

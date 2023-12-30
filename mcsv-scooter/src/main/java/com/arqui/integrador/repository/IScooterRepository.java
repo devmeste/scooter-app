@@ -14,12 +14,25 @@ import com.arqui.integrador.dto.ScooterReportDto;
 import com.arqui.integrador.model.Scooter;
 
 public interface IScooterRepository extends JpaRepository<Scooter, Integer>{
-
-	@Query("SELECT new com.arqui.integrador.dto.ScooterReportDTO(s.id, s.kmsTraveled)"
+	
+	@Query("SELECT new com.arqui.integrador.dto.ScooterReportDto("
+			+ "s.scooterId, "
+			+ "s.kmsTraveled, "
+			+ "s.usedTime, "
+			+ "s.available )"
 			+ "FROM com.arqui.integrador.model.Scooter s ")
 	List<ScooterReportDto> getScooterReport();
 
-	@Query("SELECT new com.arqui.integrador.dto.ScooterOperationDTO(COUNT(s), s.enabled)"
+	@Query("SELECT new com.arqui.integrador.dto.ScooterReportDto("
+			+ "s.scooterId, "
+			+ "s.kmsTraveled, "
+			+ "s.usedTime, "
+			+ "s.pausedTime, "
+			+ "s.available )"
+			+ "FROM com.arqui.integrador.model.Scooter s ")
+	List<ScooterReportDto> getScooterReportWithPause();
+
+	@Query("SELECT new com.arqui.integrador.dto.ScooterOperationDTO(COUNT(s), s.available)"
 			+ "FROM com.arqui.integrador.model.Scooter s "
 			+ "GROUP BY s.enabled ")
 	List<ScooterOperationDto> getScooterInOperation();

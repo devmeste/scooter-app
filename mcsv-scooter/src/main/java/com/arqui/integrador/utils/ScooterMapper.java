@@ -8,8 +8,8 @@ public final class ScooterMapper {
 	
 	public static ScooterDto entityToDto(Scooter scooter) {
 		return ScooterDto.builder()
-				.id(scooter.getId())
-				.enabled(scooter.isEnabled())
+				.id(scooter.getScooterId())
+				.enabled(scooter.isAvailable())
 				.kmsTraveled(scooter.getKmsTraveled())
 				.usedTime(scooter.getUsedTime())
 				.latitude(scooter.getLatitude())
@@ -20,8 +20,8 @@ public final class ScooterMapper {
 	
 	public static Scooter dtoToEntity(ScooterDto scooterDto) {
 		return Scooter.builder()
-				.id(scooterDto.getId())
-				.enabled(scooterDto.isEnabled())
+				.scooterId(scooterDto.getId())
+				.available(scooterDto.isEnabled())
 				.kmsTraveled(scooterDto.getKmsTraveled())
 				.usedTime(scooterDto.getUsedTime())
 				.latitude(scooterDto.getLatitude())
@@ -32,7 +32,7 @@ public final class ScooterMapper {
 	
 	public static Scooter dtoToEntityNoId(ScooterDto scooterDto) {
 		return Scooter.builder()
-				.enabled(scooterDto.isEnabled())
+				.available(scooterDto.isEnabled())
 				.kmsTraveled(scooterDto.getKmsTraveled())
 				.usedTime(scooterDto.getUsedTime())
 				.latitude(scooterDto.getLatitude())

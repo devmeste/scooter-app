@@ -22,16 +22,19 @@ public class Scooter {
 	@Id
 	@Column(name = "scooter_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long scooterId;
 	
 	@Column
-	private boolean enabled;
+	private boolean available;
 	
 	@Column(name = "kms_traveled")
 	private float kmsTraveled;
 	
 	@Column(name = "used_time")
 	private float usedTime;
+	
+	@Column(name = "paused_time")
+	private float pausedTime;
 	
 	@Column
 	private double latitude;
