@@ -16,10 +16,10 @@ spring:
     locator:
      enabled: true
    routes:
-    - id: mcsv-administrator
-      uri: lb://mcsv-administrator
+    - id: mcsv-admin
+      uri: lb://mcsv-admin
       predicates:
-       - Path=/administrator/**
+       - Path=/admin/**
       filters:
        - AuthFilter
 
