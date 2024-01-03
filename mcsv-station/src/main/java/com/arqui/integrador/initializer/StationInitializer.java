@@ -16,7 +16,7 @@ public class StationInitializer {
 		this.stationRepository = stationRepository;
 	}
 	
-	@PostConstruct
+	/*@PostConstruct
 	public void init() {
 		try {
 			this.stationRepository
@@ -31,6 +31,5 @@ public class StationInitializer {
 		} catch(RuntimeException e) {
 			
 		}
-
-	}
+	}*/
 }

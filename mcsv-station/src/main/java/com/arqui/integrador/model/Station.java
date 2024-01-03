@@ -19,19 +19,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Station {
 	
-	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@Column(name = "station_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column
 	private String location;
 	
-	@Column
 	private double latitude;
 	
-	@Column
 	private double longitude;
 }

@@ -1,20 +1,19 @@
 package com.arqui.integrador.service;
 
-import static com.arqui.integrador.utils.StationMapper.*;
+import static com.arqui.integrador.utils.StationMapper.dtoToEntity;
+import static com.arqui.integrador.utils.StationMapper.entityToDto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
-import com.arqui.integrador.dto.StationDTO;
+import com.arqui.integrador.dto.StationDto;
 import com.arqui.integrador.exception.ItemNotFoundException;
 import com.arqui.integrador.model.Station;
 import com.arqui.integrador.repository.IStationRepository;
-
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 
 @Service
 public class StationService implements IStationService{
@@ -28,11 +27,10 @@ public class StationService implements IStationService{
 	}
 
 	@Override
-	public List<StationDTO> getAll(String order) {
-		List<StationDTO> response = new ArrayList<>();
+	public List<StationDto> getAll(String order) {
 		
-		this.stationRepository.findAll(Sort.by(Sort.Direction.ASC, order)).forEach(e -> 
-			response.add(entityToDto(e)));
+		List<StationDto> response = this.stationRepository.findAll(Sort.by(Sort.Direction.ASC, order))
+				.stream().map(e -> entityToDto(e)).toList();
 		
 		LOG.info("Stations: {} Quantity: {}", response, response.size());
 		
@@ -40,7 +38,7 @@ public class StationService implements IStationService{
 	}
 
 	@Override
-	public StationDTO getById(Long id) {
+	public StationDto getById(Long id) {
 		Station response = this.findById(id);
 		
 		LOG.info("Station: {}", response);
@@ -49,7 +47,7 @@ public class StationService implements IStationService{
 	}
 
 	@Override
-	public StationDTO add(StationDTO stationDto) {
+	public StationDto add(StationDto stationDto) {
 		Station response = this.stationRepository.save(dtoToEntity(stationDto));
 		
 		LOG.info("Scooter added: {}", response);
@@ -58,7 +56,7 @@ public class StationService implements IStationService{
 	}
 
 	@Override
-	public StationDTO update(Long id, StationDTO stationDto) {
+	public StationDto update(Long id, StationDto stationDto) {
 		Station station = this.findById(id);
 		
 		stationDto.setId(station.getId());
@@ -78,9 +76,7 @@ public class StationService implements IStationService{
 	}
 	
 	private Station findById(Long id) {
-		
-		return this.stationRepository.findById(id.intValue()).orElseThrow(() ->
-		new ItemNotFoundException("Item not found.", "Item with id: " + id + "not found.")
-	);
+		return this.stationRepository.findById(id).orElseThrow(() ->
+			new ItemNotFoundException("Item not found.", "Item with id: " + id + " not found."));
 	}
 }

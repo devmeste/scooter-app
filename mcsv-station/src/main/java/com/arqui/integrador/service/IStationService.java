@@ -2,16 +2,16 @@ package com.arqui.integrador.service;
 
 import java.util.List;
 
-import com.arqui.integrador.dto.StationDTO;
+import com.arqui.integrador.dto.StationDto;
 
 public interface IStationService {
-	List<StationDTO> getAll(String order);
+	List<StationDto> getAll(String order);
 
-	StationDTO getById(Long id);
+	StationDto getById(Long id);
 
-	StationDTO add(StationDTO station);
+	StationDto add(StationDto station);
 
-	StationDTO update(Long id, StationDTO station);
+	StationDto update(Long id, StationDto station);
 
 	void delete(Long id);
 }

@@ -1,13 +1,13 @@
 package com.arqui.integrador.utils;
 
-import com.arqui.integrador.dto.StationDTO;
+import com.arqui.integrador.dto.StationDto;
 import com.arqui.integrador.model.Station;
 
 public class StationMapper {
 private StationMapper() {}
 	
-	public static StationDTO entityToDto(Station station) {
-		return StationDTO.builder()
+	public static StationDto entityToDto(Station station) {
+		return StationDto.builder()
 				.id(station.getId())
 				.location(station.getLocation())
 				.latitude(station.getLatitude())
@@ -15,7 +15,7 @@ private StationMapper() {}
 				.build();
 	}
 	
-	public static Station dtoToEntity(StationDTO stationDto) {
+	public static Station dtoToEntity(StationDto stationDto) {
 		return Station.builder()
 				.id(stationDto.getId())
 				.location(stationDto.getLocation())
@@ -24,7 +24,7 @@ private StationMapper() {}
 				.build();
 	}
 	
-	public static Station dtoToEntityNoId(StationDTO stationDto) {
+	public static Station dtoToEntityNoId(StationDto stationDto) {
 		return Station.builder()
 				.location(stationDto.getLocation())
 				.latitude(stationDto.getLatitude())

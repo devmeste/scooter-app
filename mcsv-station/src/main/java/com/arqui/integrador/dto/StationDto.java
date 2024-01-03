@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StationDTO {
+public class StationDto {
 	private Long id;
 	@NotBlank
 	private String location;
