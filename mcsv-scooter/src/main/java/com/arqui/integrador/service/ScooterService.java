@@ -116,7 +116,7 @@ public class ScooterService implements IScooterService{
 	}
 	
 	private Scooter findById(Long id) {
-		return this.scooterRepository.findById(id.intValue()).orElseThrow(() ->
+		return this.scooterRepository.findById(id).orElseThrow(() ->
 			new ItemNotFoundException("Item not found.", "Item with id: " + id + "not found.")
 		);
 	}
