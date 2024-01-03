@@ -19,7 +19,7 @@ public class TravelsInitializer {
 		this.travelRepository = travelRepository;
 	}
 
-	@PostConstruct
+	/*@PostConstruct
 	public void init() {
 		try {
 			this.travelRepository.save(Travel.builder().id("a").id_account(1).id_user(1).id_scooter(1000)
@@ -66,5 +66,5 @@ public class TravelsInitializer {
 
 		}
 
-	}
+	}*/
 }

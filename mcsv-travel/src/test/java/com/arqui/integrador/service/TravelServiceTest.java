@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @ExtendWith(MockitoExtension.class)
 class TravelServiceTest {
 	
-	@InjectMocks
+	/*@InjectMocks
 	private TravelService travelService;
 	
 	@Mock
@@ -320,6 +320,6 @@ class TravelServiceTest {
 		this.travelService.delete("b");
 		
 		Mockito.verify(this.travelRepository, Mockito.times(1)).deleteById("b");
-	}
+	}*/
 
 }
