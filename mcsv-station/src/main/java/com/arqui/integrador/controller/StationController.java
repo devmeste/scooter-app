@@ -8,10 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.arqui.integrador.dto.StationDTO;
+import com.arqui.integrador.dto.StationDto;
 import com.arqui.integrador.service.IStationService;
-
-import jakarta.validation.Valid;
 
 @RestController
 public class StationController implements IStationController{
@@ -25,34 +23,28 @@ public class StationController implements IStationController{
 	}
 
 	@Override
-	public ResponseEntity<List<StationDTO>> getAll(String order) {
-		List<StationDTO> response = this.stationService.getAll(order);
+	public ResponseEntity<List<StationDto>> getAll(String order) {
+		LOG.info("Getting all stations ordered by: {}",  order);
 		
-		LOG.info("Getting all stations: {} order by: {}", response, order);
-		
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok(this.stationService.getAll(order));
 	}
 
 	@Override
-	public ResponseEntity<StationDTO> getById(Long id) {
-		StationDTO response = this.stationService.getById(id);
-		
+	public ResponseEntity<StationDto> getById(Long id) {
 		LOG.info("Getting station by id: {}", id);
 		
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok(this.stationService.getById(id));
 	}
 
 	@Override
-	public ResponseEntity<StationDTO> add(StationDTO station) {
-		StationDTO response = this.stationService.add(station);
-		
+	public ResponseEntity<StationDto> add(StationDto station) {
 		LOG.info("Creating station with request body: {}", station);
 		
-		return new ResponseEntity<>(response, HttpStatus.CREATED);
+		return new ResponseEntity<>(this.stationService.add(station), HttpStatus.CREATED);
 	}
 
 	@Override
-	public ResponseEntity<StationDTO> update(Long id, StationDTO station) {
+	public ResponseEntity<StationDto> update(Long id, StationDto station) {
 		LOG.info("Editing station by id: {} with request body: {}", id, station);
 		
 		return ResponseEntity.ok(this.stationService.update(id, station));

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.arqui.integrador.dto.StationDTO;
+import com.arqui.integrador.dto.StationDto;
 
 import jakarta.validation.Valid;
 
@@ -28,23 +28,23 @@ public interface IStationController {
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	ResponseEntity<List<StationDTO>> getAll(
+	ResponseEntity<List<StationDto>> getAll(
 			@RequestParam(value = "orderBy", defaultValue = "id") String order);
 	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	ResponseEntity<StationDTO> getById(@PathVariable("id") Long id);
+	ResponseEntity<StationDto> getById(@PathVariable("id") Long id);
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	ResponseEntity<StationDTO> add(@RequestBody @Valid StationDTO station);
+	ResponseEntity<StationDto> add(@RequestBody @Valid StationDto station);
 	
 	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	ResponseEntity<StationDTO> update(@PathVariable("id") Long id,@RequestBody @Valid StationDTO station);
+	ResponseEntity<StationDto> update(@PathVariable("id") Long id,@RequestBody @Valid StationDto station);
 	
 	@DeleteMapping(value = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
