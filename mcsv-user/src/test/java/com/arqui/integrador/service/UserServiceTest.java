@@ -22,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import com.arqui.integrador.dto.AccountDto;
 import com.arqui.integrador.dto.ScooterDto;
 import com.arqui.integrador.dto.UserDto;
+import com.arqui.integrador.exception.InvalidUsernameException;
 import com.arqui.integrador.exception.ItemNotFoundException;
 import com.arqui.integrador.exception.UserHasAccountException;
 import com.arqui.integrador.model.Account;
@@ -200,7 +201,7 @@ class UserServiceTest {
 	void updateTest() {
 		User user = User.builder()
 				.id(34037899L)
-				.username("meste73")
+				.username("meste")
 				.cellphone(2494380393L)
 				.email("elmeste.88@gmail.com")
 				.firstname("Ezequiel")
@@ -232,8 +233,36 @@ class UserServiceTest {
 		
 		Mockito.verify(this.userRepository, Mockito.times(1)).save(userEdited);
 		
-		Assertions.assertEquals("meste", userDto.getUsername());
-		Assertions.assertNotEquals("meste73", userDto.getUsername());
+		Assertions.assertEquals("dev.mestelan@gmail.com", userDto.getEmail());
+		Assertions.assertNotEquals("elmeste.88@gmail.com", userDto.getEmail());
+	}
+	
+	@Test
+	void updateTestUsernameException() {
+		User user = User.builder()
+				.id(34037899L)
+				.username("meste73")
+				.cellphone(2494380393L)
+				.email("elmeste.88@gmail.com")
+				.firstname("Ezequiel")
+				.surname("Mestelan")
+				.build();
+		
+		UserDto userEditedDto = UserDto.builder()
+				.id(34037899L)
+				.username("meste")
+				.cellphone(2494380393L)
+				.email("dev.mestelan@gmail.com")
+				.firstname("Ezequiel")
+				.surname("Mestelan")
+				.build();
+		
+		Mockito.when(this.userRepository.findById(34037899L)).thenReturn(Optional.of(user));
+		
+		InvalidUsernameException expectedException = Assertions.assertThrows(
+				InvalidUsernameException.class, () -> this.userService.update(34037899L, userEditedDto));
+		
+		Assertions.assertEquals("Username from userDto provided does not match with user entity username.", expectedException.getDescription());
 	}
 	
 	@Test
