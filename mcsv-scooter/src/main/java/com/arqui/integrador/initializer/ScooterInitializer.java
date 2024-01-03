@@ -16,7 +16,7 @@ public class ScooterInitializer {
 		this.scooterRepository = scooterRepository;
 	}
 	
-	@PostConstruct
+	/*@PostConstruct
 	public void init() {
 		try {
 			this.scooterRepository.save(Scooter.builder().enabled(true).kmsTraveled(2494380393L).usedTime(150)
@@ -52,5 +52,5 @@ public class ScooterInitializer {
 		} catch(RuntimeException e) {
 			
 		}
-	}
+	}*/
 }
